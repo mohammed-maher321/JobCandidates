@@ -23,7 +23,7 @@ namespace JobCandidates.Test.UserProfileUseCases.Queries
         }
 
         [Fact]
-        public async Task GetCustomerDetail()
+        public async Task GetUserProfileDetail()
         {
             var sut = new GetUserProfileQueryHandler(_context);
 
