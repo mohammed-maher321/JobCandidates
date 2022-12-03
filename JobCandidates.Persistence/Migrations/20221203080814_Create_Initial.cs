@@ -15,14 +15,14 @@ namespace JobCandidates.Persistence.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CallFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CallTo = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GitHubProfile = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LinkedInProfile = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    GitHubProfile = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    LinkedInProfile = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {

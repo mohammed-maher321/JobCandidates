@@ -19,6 +19,10 @@ namespace JobCandidates.Persistence.Configurations
 
             entity.Property(e => e.Id).ValueGeneratedOnAdd().IsRequired();
             entity.Property(e => e.Email).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.FirstName).IsRequired().HasMaxLength(75);
+            entity.Property(e => e.LastName).IsRequired().HasMaxLength(75);
+            entity.Property(e => e.LinkedInProfile).HasMaxLength(300);
+            entity.Property(e => e.GitHubProfile).HasMaxLength(300);
             entity.Property(e => e.Phone).HasMaxLength(15);
 
 
