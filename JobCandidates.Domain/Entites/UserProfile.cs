@@ -17,5 +17,6 @@ namespace JobCandidates.Domain.Entites
         public DateTime CallTo { get; set; }
         public string GitHubProfile { get; set; }
         public string LinkedInProfile { get; set; }
+        public virtual ICollection<UserDocument> UserDocuments { get; set; }
     }
 }
