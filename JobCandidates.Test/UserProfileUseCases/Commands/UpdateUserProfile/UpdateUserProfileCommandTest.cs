@@ -2,7 +2,6 @@
 using JobCandidates.Application.UserProfileUseCases.Commands;
 using JobCandidates.Test.Common;
 using MediatR;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Threading;
@@ -40,7 +39,7 @@ namespace JobCandidates.Test.UserProfileUseCases.Commands.AddUserProfile
 
 
             // Assert
-            Assert.IsNotNull(result.Result);
+            Assert.True(result.Result != null);
         }
     }
 }
