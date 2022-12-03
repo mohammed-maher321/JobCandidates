@@ -23,8 +23,10 @@ namespace JobCandidates.Application.UserProfileUseCases.Commands
 
             RuleFor(x => x.UserProfile.Email).NotNull().WithMessage("Email Is Required")
                                              .MaximumLength(200).WithMessage("Email Length is 200 character")
-                                             .EmailAddress().WithMessage("A valid email is required")
-                                             .Must(EmailUnique).WithMessage("This Email already exists."); 
+                                             .EmailAddress().WithMessage("A valid email is required");
+
+
+            RuleFor(x => x.UserProfile).Must(x => EmailUnique(x.Email,x.Id)).WithMessage("This Email already exists."); 
 
             RuleFor(x => x.UserProfile.Phone).MaximumLength(15).WithMessage("Phone Length is 15 character")
                                              .Matches(new Regex(@"((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}")).WithMessage("Phone Number not valid");
@@ -39,7 +41,6 @@ namespace JobCandidates.Application.UserProfileUseCases.Commands
 
 
 
-            RuleFor(x => x.UserProfile.UserDocuments).NotNull().WithMessage("At least one Attachment Is Required");
             RuleForEach(x => x.UserProfile.UserDocuments).ChildRules(docs =>
             {
                 docs.RuleFor(x => x.FileName).Must(FileExtention).WithMessage("File Extesion must be .csv");
@@ -48,11 +49,11 @@ namespace JobCandidates.Application.UserProfileUseCases.Commands
 
         }
 
-        private bool EmailUnique(string email)
+        private bool EmailUnique(string email, long id)
         {
             using(JobCandidatesContext context = new JobCandidatesContext())
             {
-                return context.UserProfile.Where(s => s.Email.ToLower() == email.ToLower()).Count() == 0;
+                return context.UserProfile.Where(s => s.Email.ToLower() == email.ToLower() && s.Id != id).Count() == 0;
             }
            
         }

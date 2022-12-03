@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JobCandidates.Application.UserProfileUseCases.Queries
 {
-    internal class GetAllUserProfilesModel : IRequest<GettAllUserProfilesListDto>
+    public class GetAllUserProfilesModel : IRequest<GettAllUserProfilesListDto>
     {
         public int Skip { get; set; }
         public int Take { get; set; }

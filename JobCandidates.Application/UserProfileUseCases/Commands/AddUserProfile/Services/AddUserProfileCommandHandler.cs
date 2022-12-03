@@ -28,19 +28,21 @@ namespace JobCandidates.Application.UserProfileUseCases.Commands
 
         public async Task<AddUserProfileDto> Handle(AddUserProfileModel request, CancellationToken cancellationToken)
         {
-
-            await _databaseContext.UserProfile.AddAsync(request.UserProfile);
-            await _databaseContext.SaveChangesAsync(cancellationToken);
-
             foreach (var item in request.Files)
             {
                 var fileNameSpiltted = item.Key.Split('.');
                 string fileExtension = fileNameSpiltted[fileNameSpiltted.Length - 1];
                 List<KeyValuePair<Stream, string>> attachments = new List<KeyValuePair<Stream, string>>();
-                string dir = _attachmentService.GetMappedDirectory("UserProfile/{UserProfileEmail}", new Dictionary<string, string>() { { "UserProfileEmail", request.UserProfile.Email} }, UploadTypeEnum.LocalServer) + "/" + Guid.NewGuid() + "." + fileExtension;
+                string dir = _attachmentService.GetMappedDirectory("UserProfile/{UserProfileEmail}", new Dictionary<string, string>() { { "UserProfileEmail", request.UserProfile.Email } }, UploadTypeEnum.LocalServer) + "/" + request.UserProfile.UserDocuments.FirstOrDefault(s => s.FileName == item.Key).FilePath + "." + fileExtension;
                 attachments.Add(new KeyValuePair<Stream, string>(item.Value, dir));
                 _attachmentService.UploadAttachment(attachments, UploadTypeEnum.LocalServer);
             }
+
+
+            await _databaseContext.UserProfile.AddAsync(request.UserProfile);
+            await _databaseContext.SaveChangesAsync(cancellationToken);
+
+            
            
             return new AddUserProfileDto() { UserProfile = request.UserProfile };
         }
