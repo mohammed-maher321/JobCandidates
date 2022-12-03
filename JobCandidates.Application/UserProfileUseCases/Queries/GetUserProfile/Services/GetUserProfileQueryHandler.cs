@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace JobCandidates.Application.UserProfileUseCases.Queries
 {
-    internal class GetUserProfileQueryHandler : IRequestHandler<GetUserProfileModel, GettUserProfileDto>
+    public class GetUserProfileQueryHandler : IRequestHandler<GetUserProfileModel, GettUserProfileDto>
     {
         private readonly IJobCandidatesContext _databaseContext;
 

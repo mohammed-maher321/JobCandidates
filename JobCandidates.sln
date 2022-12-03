@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobCandidates.Domain", "Job
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobCandidates.Persistence", "JobCandidates.Persistence\JobCandidates.Persistence.csproj", "{238657DD-BD77-4048-9C7A-871DA953AC8E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobCandidates.Test", "JobCandidates.Test\JobCandidates.Test.csproj", "{0E0A7A86-F707-4C72-9267-830A79A3DD07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{238657DD-BD77-4048-9C7A-871DA953AC8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{238657DD-BD77-4048-9C7A-871DA953AC8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{238657DD-BD77-4048-9C7A-871DA953AC8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E0A7A86-F707-4C72-9267-830A79A3DD07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E0A7A86-F707-4C72-9267-830A79A3DD07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E0A7A86-F707-4C72-9267-830A79A3DD07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E0A7A86-F707-4C72-9267-830A79A3DD07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

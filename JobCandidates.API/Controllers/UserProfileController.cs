@@ -15,7 +15,7 @@ namespace JobCandidates.API.Controllers
         [AllowAnonymous]
         [HttpPost]
 
-        public async Task<IActionResult> AddUserProfile([FromBody] AddUserProfileIM addUserProfileModel)
+        public async Task<IActionResult> AddUserProfile([FromForm] AddUserProfileIM addUserProfileModel)
         {
             AddUserProfileModel commandModel = addUserProfileModel.Map();
             var response = await Mediator.Send(commandModel);
@@ -46,7 +46,7 @@ namespace JobCandidates.API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetAllUserProfiles(int skip, int take,string keyword)
+        public async Task<IActionResult> GetAllUserProfiles(int skip, int take,string? keyword)
         {
             GetAllUserProfilesModel queryModel = new GetAllUserProfilesModel() { Skip = skip, Take = take, Keyword = keyword };
             var response = await Mediator.Send(queryModel);

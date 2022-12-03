@@ -13,8 +13,7 @@ namespace JobCandidates.API.InputModels
         public DateTime CallTo { get; set; }
         public string GitHubProfile { get; set; }
         public string LinkedInProfile { get; set; }
-        public virtual List<UserDocumentIM> UserDocuments { get; set; }
-
+        public IFormFile[] Files { get; set; }
         public UpdateUserProfileModel Map()
         {
             UpdateUserProfileModel model = new UpdateUserProfileModel()
@@ -30,7 +29,7 @@ namespace JobCandidates.API.InputModels
                     LastName = LastName,
                     LinkedInProfile = LinkedInProfile,
                     Phone = Phone,
-                    UserDocuments = UserDocuments.Select(s => new Domain.Entites.UserDocument()
+                    UserDocuments = Files?.Select(s => new Domain.Entites.UserDocument()
                     {
                         FileName = s.FileName,
                         FilePath = Guid.NewGuid().ToString()
@@ -39,7 +38,7 @@ namespace JobCandidates.API.InputModels
                 
                 
             };
-            model.Files = model.UserProfile.UserDocuments.Select(s => new KeyValuePair<string, Stream>(s.FileName, UserDocuments.FirstOrDefault(s => s.FileName == s.FileName).File.OpenReadStream())).ToList();
+            model.Files = model.UserProfile?.UserDocuments?.Select(s => new KeyValuePair<string, Stream>(s.FileName, Files?.FirstOrDefault(s => s.FileName == s.FileName).OpenReadStream())).ToList();
             return model;
         }
     }

@@ -1,4 +1,6 @@
 ﻿using JobCandidates.Application.Common;
+using JobCandidates.Application.UserProfileUseCases.Commands;
+using JobCandidates.Application.UserProfileUseCases.Queries;
 using JobCandidates.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,10 @@ namespace JobCandidates.Bootstrapper
         public void ConfigureMediatR(IServiceCollection services, IConfiguration configuration)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR(typeof(AddUserProfileModel).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(UpdateUserProfileModel).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetAllUserProfilesModel).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetUserProfileModel).GetTypeInfo().Assembly);
         }
 
         public void ConfigurePersistence(IServiceCollection services, IConfiguration configuration, string connectionStringName)
