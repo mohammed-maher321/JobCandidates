@@ -2,8 +2,10 @@
 using JobCandidates.Application.UserProfileUseCases.Commands;
 using JobCandidates.Test.Common;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using System;
+using System.IO;
 using System.Threading;
 using Xunit;
 
@@ -16,9 +18,18 @@ namespace JobCandidates.Test.UserProfileUseCases.Commands.AddUserProfile
         {
             // Arrange
             var mediatorMock = new Mock<IMediator>();
-            var attachmentServiceMock = new Mock<AttachmentService>();
+            var basePath = Directory.GetCurrentDirectory() + string.Format("{0}", Path.DirectorySeparatorChar);
+            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
-            var sut = new UpdateUserProfileCommandHandler(_context, attachmentServiceMock.Object, mediatorMock.Object);
+            var configuration = new ConfigurationBuilder()
+               .SetBasePath(basePath)
+               .AddJsonFile("appsettings.json")
+               .AddJsonFile($"appsettings.Local.json", optional: true)
+               .AddJsonFile($"appsettings.{environmentName}.json", optional: true)
+               .AddEnvironmentVariables()
+               .Build();
+
+            var sut = new UpdateUserProfileCommandHandler(_context, new AttachmentService(configuration), mediatorMock.Object);
 
             // Act
             var result = sut.Handle(new UpdateUserProfileModel()
