@@ -2,31 +2,31 @@
 using JobCandidates.Application.UserProfileUseCases.Commands;
 using JobCandidates.Application.UserProfileUseCases.Queries;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobCandidates.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [Authorize]
-    [ApiExplorerSettings(GroupName = "v1-UserProfile")]
+    [ApiExplorerSettings(GroupName = "UserProfile")]
     public class UserProfileController : BaseController
     {
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> AddUserProfile([FromBody] AddUserProfileIM model)
+
+        public async Task<IActionResult> AddUserProfile([FromBody] AddUserProfileIM addUserProfileModel)
         {
-            AddUserProfileModel commandModel = model.Map();
+            AddUserProfileModel commandModel = addUserProfileModel.Map();
             var response = await Mediator.Send(commandModel);
             return Ok(response);
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileIM model)
+        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileIM updateUserProfileModel)
         {
-            UpdateUserProfileModel commandModel = model.Map();
+            UpdateUserProfileModel commandModel = updateUserProfileModel.Map();
             var response = await Mediator.Send(commandModel);
             return Ok(response);
         }
